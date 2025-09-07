@@ -13,7 +13,6 @@ public class User {
 	private Role role;
 	private Gender gender;
 	
-
 	public String getFullName() {
 		return fullName;
 	}
@@ -78,4 +77,7 @@ public class User {
 		this.gender = gender;
 	}
 
-}
+	
+	}
+
+

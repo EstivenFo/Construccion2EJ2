@@ -14,7 +14,7 @@ public class HumanResourcesUseCase {
 
 	private UpdateUser updateUser;
 
-	public void updateUser(User user) throws Exception {
+	public void updateUser(String idCard, User user) throws Exception {
 		updateUser.update(user);
 	}
 }

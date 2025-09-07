@@ -24,11 +24,13 @@ public class MedicUseCase {
 	   updateRecord.updateRecord(null, record, null);
    }
    private CreateOrder crearteOrder;
-   public void crearteOrder (Order order)throws Exception{
+   public void createOrder (Order order)throws Exception{
 	   crearteOrder.create(null, null, false, null, order);
    }
    
-} 
+   }
+   
+
 
 
 
