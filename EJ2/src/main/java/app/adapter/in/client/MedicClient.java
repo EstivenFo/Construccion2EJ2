@@ -1,94 +1,133 @@
 package app.adapter.in.client;
 
-import java.time.LocalDateTime;
-import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import app.application.usecases.MedicUseCase;
 import app.domain.model.Order;
 import app.domain.model.Record;
+import app.domain.model.Patient;
+import app.domain.model.User;
+import app.domain.model.MedicalRecord;
+import app.domain.services.CreateOrder;
+import app.domain.services.CreateRecord;
+import app.domain.services.UpdateRecord;
+import app.domain.services.SearchMedicalRecordByPatient;
 
 @Controller
 public class MedicClient {
 
-    private static final String MENU = 
-              "Ingrese una de las opciones \n"
-            + "1. Crear registro médico \n"
-            + "2. Crear orden médica \n"
-            + "3. Salir";
+	@Autowired
+	private CreateOrder createOrder;
 
-    private static Scanner reader = new Scanner(System.in);
+	@Autowired
+	private CreateRecord createRecord;
 
-    @Autowired
-    private MedicUseCase medicUseCase;
+	@Autowired
+	private UpdateRecord updateRecord;
 
-    public void session() {
-        boolean session = true;
-        while (session) {
-            session = menu();
-        }
-    }
+	@Autowired
+	private SearchMedicalRecordByPatient searchMedicalRecordByPatient;
 
-    private boolean menu() {
-        try {
-            System.out.println(MENU);
-            String option = reader.nextLine();
-            switch (option) {
-            case "1": {
-                Record record = readMedicalRecordData();
-                medicUseCase.createRecord(record);
-                return true;
-            }
-            case "2": {
-                Order order = readOrderData();
-                medicUseCase.createOrder(order);
-                return true;
-            }
-            case "3": {
-                System.out.println("Hasta luego \nCerrando sesión...");
-                return false;
-            }
-            default: {
-                System.out.println("Ingrese una opción válida");
-                return true;
-            }
-            }
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-            return true;
-        }
-    }
+	private final Scanner reader = new Scanner(System.in);
+	private User currentDoctor;
 
-    // Construir un registro médico
-    private Record readMedicalRecordData() {
-        Record record = new Record();
-        System.out.println("Ingrese el ID del doctor:");
-        record.setDoctorId(reader.nextLine());
-        record.setDateTime(LocalDateTime.now());
-        System.out.println("Ingrese el diagnóstico:");
-        record.setDiagnosis(reader.nextLine());
-        System.out.println("Ingrese el tratamiento:");
-        record.setTreatment(reader.nextLine());
-        System.out.println("Ingrese notas adicionales:");
-        record.setNotes(reader.nextLine());
-        // Ejemplo simple de tests y recetas
-        record.setTests(Arrays.asList("Hemograma", "Rayos X"));
-        record.setPrescriptions(Arrays.asList("Ibuprofeno 400mg", "Amoxicilina 500mg"));
-        return record;
-    }
+	// Simulamos autenticación del médico
+	public void login(User doctor) {
+		this.currentDoctor = doctor;
+	}
 
-    // Construir una orden médica
-    private Order readOrderData() {
-        Order order = new Order();
-        System.out.println("Ingrese el ID del paciente:");
-        order.setPatientId(reader.nextLine());
-        System.out.println("Ingrese el ID del doctor:");
-        order.setDoctorId(reader.nextLine());
-        order.setCreationDate(java.time.LocalDate.now());
-        return order;
-    }
+	// Crear una orden médica
+	public void createOrderForPatient() {
+		try {
+			System.out.println("Ingrese el ID del paciente:");
+			String patientId = reader.nextLine();
+
+			System.out.println("¿Requiere hospitalización? (true/false):");
+			boolean requiresHospitalization = Boolean.parseBoolean(reader.nextLine());
+
+			Order order = new Order();
+
+			createOrder.create(patientId, String.valueOf(currentDoctor.getIdCard()), requiresHospitalization,
+					currentDoctor, order);
+
+			System.out.println("✅ Orden médica creada exitosamente.");
+		} catch (Exception e) {
+			System.out.println("❌ Error al crear orden médica: " + e.getMessage());
+		}
+	}
+
+	// Crear un registro clínico
+	public void createRecordForPatient() {
+		try {
+			System.out.println("Ingrese el ID del paciente:");
+			String patientId = reader.nextLine();
+
+			Record record = new Record();
+			record.setDoctorId(currentDoctor.getIdCard());
+
+			System.out.println("Ingrese diagnóstico:");
+			record.setDiagnosis(reader.nextLine());
+
+			System.out.println("Ingrese tratamiento:");
+			record.setTreatment(reader.nextLine());
+
+			// ⚠️ CreateRecord espera (String, Record, User)
+			createRecord.create(patientId, record, currentDoctor);
+
+			System.out.println("✅ Registro clínico creado exitosamente.");
+		} catch (Exception e) {
+			System.out.println("❌ Error al crear registro clínico: " + e.getMessage());
+		}
+	}
+
+	// Actualizar un registro clínico
+	public void updateRecordForPatient() {
+		try {
+			System.out.println("Ingrese el ID del paciente:");
+			String patientId = reader.nextLine();
+
+			Record record = new Record();
+			record.setDoctorId(currentDoctor.getIdCard());
+
+			System.out.println("Ingrese nuevo diagnóstico:");
+			record.setDiagnosis(reader.nextLine());
+
+			System.out.println("Ingrese nuevo tratamiento:");
+			record.setTreatment(reader.nextLine());
+
+			// ⚠️ UpdateRecord espera (String, Record, User)
+			updateRecord.updateRecord(patientId, record, currentDoctor);
+
+			System.out.println("✅ Registro clínico actualizado exitosamente.");
+		} catch (Exception e) {
+			System.out.println("❌ Error al actualizar registro clínico: " + e.getMessage());
+		}
+	}
+
+	// Buscar historia clínica (órdenes, registros, etc.) por paciente
+	public void searchMedicalHistoryByPatient() {
+		try {
+			System.out.println("Ingrese el ID del paciente:");
+			String patientId = reader.nextLine();
+
+			Patient patient = new Patient();
+			patient.setPatientId(Long.parseLong(patientId));
+
+			// ⚠️ SearchMedicalRecordByPatient espera (Patient, User)
+			List<MedicalRecord> records = searchMedicalRecordByPatient.search(patient, currentDoctor);
+
+			System.out.println("📋 Historia clínica del paciente:");
+			for (MedicalRecord rec : records) {
+				System.out.println("- Fecha: " + rec.getDate());
+				System.out.println("  Diagnóstico: " + rec.getDiagnosis());
+				System.out.println("  Tratamiento: " + rec.getTreatment());
+				System.out.println("-----------------------------------");
+			}
+		} catch (Exception e) {
+			System.out.println("❌ Error al consultar historia clínica: " + e.getMessage());
+		}
+	}
 }
-

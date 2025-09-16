@@ -1,147 +1,118 @@
 package app.adapter.in.client;
 
- 
-
 import java.util.Scanner;
-
- 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
- 
-
-import app.application.usecases.HumanResourcesUseCase;
 import app.domain.model.User;
-import app.domain.model.enums.Gender;
 import app.domain.model.enums.Role;
-
- 
+import app.domain.services.CreateUser;
+import app.domain.services.UpdateUser;
 
 @Controller
 public class HumanResourcesClient {
+	@Autowired
+	private  CreateUser createUser;
+	@Autowired
+	private  UpdateUser updateUser;
 
- 
+	
+	public HumanResourcesClient(CreateUser createUser, UpdateUser updateUser) {
+		this.createUser = createUser;
+		this.updateUser = updateUser;
+	}
+	
+	private static final String MENU = """
+			=== Menú Recursos Humanos ===
+			1. Crear empleado
+			2. Actualizar empleado
+			3. Buscar empleado
+			0. Salir
+			""";
 
-    private static final String MENU = """
-            === Gestión de Recursos Humanos ===
-            1. Crear empleado
-            2. Actualizar empleado
-            3. Buscar empleado por ID
-            4. Salir
-            """;
+	public void run() {
+		Scanner sc = new Scanner(System.in);
+		int opcion;
+		do {
+			System.out.println(MENU);
+			opcion = sc.nextInt();
+			sc.nextLine(); // limpiar buffer
 
- 
+			try {
+				switch (opcion) {
+				case 1 -> create(sc);
+				case 2 -> update(sc);
+				case 3 -> search(sc);
+				case 0 -> System.out.println("Saliendo...");
+				default -> System.out.println("Opción inválida.");
+				}
+			} catch (Exception e) {
+				System.out.println("Error: " + e.getMessage());
+			}
 
-    private static final Scanner reader = new Scanner(System.in);
+		} while (opcion != 0);
 
- 
+		sc.close();
+	}
 
-    @Autowired
-    private HumanResourcesUseCase humanResourcesUseCase;
+	private void create(Scanner sc) throws Exception {
+		User user = new User();
+		System.out.print("Nombre completo: ");
+		user.setFullName(sc.nextLine());
 
- 
+		System.out.print("Cédula: ");
+		user.setIdCard(sc.nextLine());
+		sc.nextLine();
 
-    public void session() {
-        boolean session = true;
-        while (session) {
-            session = menu();
-        }
-    }
+		System.out.print("Email: ");
+		user.setEmail(sc.nextLine());
 
- 
+		System.out.print("Teléfono: ");
+		user.setPhone(sc.nextLong());
+		sc.nextLine();
 
-    private boolean menu() {
-        try {
-            System.out.println(MENU);
-            String option = reader.nextLine();
+		System.out.print("Dirección: ");
+		user.setAddress(sc.nextLine());
 
- 
+		user.setRole(Role.HUMANRESOURCES); // el que crea debe ser RH
 
-            switch (option) {
-                case "1" -> {
-                    User user = readUser();
-                    humanResourcesUseCase.createUser(user);
-                    System.out.println("✅ Empleado creado correctamente.");
-                    return true;
-                }
-                case "2" -> {
-                    User user = readUser();
-                    humanResourcesUseCase.updateUser(option, user);
-                    System.out.println("✔ Empleado actualizado correctamente.");
-                    return true;
-                }
+		createUser.createUser(user);
+		System.out.println("Empleado creado con éxito.");
+	}
 
-            
-                case "3" -> {
-                    System.out.println("👋 Cerrando sesión de Recursos Humanos...");
-                    return false;
-                }
-                default -> {
-                    System.out.println("⚠️ Opción inválida. Intente nuevamente.");
-                    return true;
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("❌ Error: " + e.getMessage());
-            return true;
-        }
-    }
+	private void update(Scanner sc) throws Exception {
+		User user = new User();
 
- 
+		System.out.print("Cédula del empleado a actualizar: ");
+		user.setIdCard(sc.nextLine());
+		sc.nextLine();
 
-    // === Métodos auxiliares ===
+		System.out.print("Nuevo nombre completo: ");
+		user.setFullName(sc.nextLine());
 
- 
+		System.out.print("Nuevo email: ");
+		user.setEmail(sc.nextLine());
 
-    private User readUser() {
-        User user = new User();
+		System.out.print("Nuevo teléfono: ");
+		user.setPhone(sc.nextLong());
+		sc.nextLine();
 
- 
+		System.out.print("Nueva dirección: ");
+		user.setAddress(sc.nextLine());
 
-        System.out.println("Ingrese el nombre completo:");
-        user.setFullName(reader.nextLine());
+		user.setRole(Role.HUMANRESOURCES); // RH actualizando
 
- 
+		updateUser.update(user);
+		System.out.println("Empleado actualizado con éxito.");
+	}
 
-        System.out.println("Ingrese el número de cédula:");
-        user.setIdCard(Long.parseLong(reader.nextLine()));
+	private void search(Scanner sc) throws Exception {
+		System.out.print("Ingrese la cédula: ");
+		String idCard = sc.nextLine();
+		sc.nextLine();
 
- 
-
-        System.out.println("Ingrese el correo electrónico:");
-        user.setEmail(reader.nextLine());
-
- 
-
-        System.out.println("Ingrese el teléfono:");
-        user.setPhone(Long.parseLong(reader.nextLine()));
-
- 
-
-        System.out.println("Ingrese la fecha de nacimiento (yyyyMMdd):");
-        user.setBirthDate(Long.parseLong(reader.nextLine()));
-
- 
-
-        System.out.println("Ingrese la dirección:");
-        user.setAddress(reader.nextLine());
-
- 
-
-        System.out.println("Ingrese el género (MALE, FEMALE, OTHER):");
-        user.setGender(Gender.valueOf(reader.nextLine().toUpperCase()));
-
- 
-
-        System.out.println("Ingrese el rol (MEDIC, NURSE, ADMINISTRATIVESTAFF, HUMANRESOURCES):");
-        user.setRole(Role.valueOf(reader.nextLine().toUpperCase()));
-
- 
-
-        return user;
-    }
+		User user = createUser.searchById(idCard);
+		System.out.println("Empleado encontrado: " + user);
+	}
 }
-
-
-
