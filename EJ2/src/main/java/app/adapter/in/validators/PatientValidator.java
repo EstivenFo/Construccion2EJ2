@@ -13,7 +13,7 @@ public class PatientValidator extends SimpleValidator {
     }
 
     public long birthDateValidator(String value) throws Exception {
-        return longValidator("Fecha de nacimiento (epoch o formato numérico)", value);
+        return longValidator("Fecha de nacimiento", value);
     }
 
     public String genderValidator(String value) throws Exception {

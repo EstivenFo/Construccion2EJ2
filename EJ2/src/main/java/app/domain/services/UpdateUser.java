@@ -13,10 +13,10 @@ public class UpdateUser {
     // Método para actualizar un empleado
     public void update(User user) throws Exception {
         // Validar que el empleado exista
-        User existingUser = userPort.searchById(user.getIdCard());
-        if (existingUser == null) {
-            throw new Exception("No se encontró un empleado con ID: " + user.getIdCard());
-        }
+    	  User existingUser = userPort.searchById(user.getIdCard());
+          if (existingUser == null) {
+              throw new Exception("No se encontró un usuario con la cédula: " + user.getIdCard());
+          }
         if (user.getRole() != Role.HUMANRESOURCES) {
             throw new SecurityException("Solo personal de Recursos Humanos puede Actualizar un empleado.");
         }

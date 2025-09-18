@@ -10,7 +10,7 @@ public interface UserPort {
     public void save(User user) throws Exception;
 
     // Buscar empleado por número de identificación
-    public User searchById(String idCard) throws Exception;
+    public User searchById(long idCard) throws Exception;
 
     // Listar todos los empleados
     public List<User> findAll() throws Exception;
@@ -20,5 +20,6 @@ public interface UserPort {
 
     // Eliminar empleado por ID
     public void delete(long idCard) throws Exception;
+
     
 }

@@ -9,8 +9,8 @@ public class UserValidator extends SimpleValidator {
         return stringValidator("Nombre completo", value);
     }
 
-    public String idCardValidator(String value) throws Exception {
-        return stringValidator("Cédula de identidad", value);
+    public long idCardValidator(String value) throws Exception {
+        return longValidator("Cédula de identidad", value);
     }
 
     public String emailValidator(String value) throws Exception {

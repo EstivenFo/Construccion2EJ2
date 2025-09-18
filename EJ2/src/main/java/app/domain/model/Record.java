@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class Record {
-	private String doctorId; // Identifica al médico responsable
+	private long doctorId; // Identifica al médico responsable
 	private LocalDateTime dateTime; // Fecha y hora de la atención
 	private String diagnosis; // Diagnóstico realizado
 	private String treatment; // Plan de tratamiento
@@ -12,11 +12,11 @@ public class Record {
 	private List<String> prescriptions; // Lista de medicamentos recetados
 	private String notes;
 
-	public String getDoctorId() {
+	public long getDoctorId() {
 		return doctorId;
 	}
 
-	public void setDoctorId(String doctorId) {
+	public void setDoctorId(long doctorId) {
 		this.doctorId = doctorId;
 	}
 

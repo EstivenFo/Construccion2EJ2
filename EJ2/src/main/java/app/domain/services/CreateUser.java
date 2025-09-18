@@ -30,7 +30,7 @@ public class CreateUser {
 
 
     // Buscar empleado por ID
-    public User searchById(String idCard) throws Exception {
+    public User searchById(long idCard) throws Exception {
         User user = userPort.searchById(idCard);
         if (user == null) {
             throw new Exception("Empleado con ID " + idCard + " no encontrado.");

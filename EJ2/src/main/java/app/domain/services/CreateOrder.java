@@ -16,14 +16,14 @@ public class CreateOrder {
 	@Autowired
 	private OrderPort orderPort;
 
-	public void create(String patientId, String doctorId, boolean requiresHospitalization, User user, Order order)
+	public void create(long patientId, long doctorId, boolean requiresHospitalization, User user, Order order)
 			throws Exception {
 
-		if (patientId == null || patientId.isEmpty()) {
+		if (patientId == 0){
 			throw new IllegalArgumentException("El paciente es obligatorio");
 		}
 		  
-		if (doctorId == null || doctorId.isEmpty()) {
+		if (doctorId == 0) {
 			throw new IllegalArgumentException("El doctor es obligatorio");
 
 		}

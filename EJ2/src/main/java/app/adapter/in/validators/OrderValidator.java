@@ -9,12 +9,12 @@ public class OrderValidator extends SimpleValidator {
         return intValidator("número de la orden", value);
     }
 
-    public String patientIdValidator(String value) throws Exception {
-        return stringValidator("ID del paciente", value);
+    public long patientIdValidator(String value) throws Exception {
+        return longValidator("ID del paciente", value);
     }
 
-    public String doctorIdValidator(String value) throws Exception {
-        return stringValidator("ID del doctor", value);
+    public long doctorIdValidator(String value) throws Exception {
+        return longValidator("ID del doctor", value);
     }
 
     public java.time.LocalDate creationDateValidator(String value) throws Exception {

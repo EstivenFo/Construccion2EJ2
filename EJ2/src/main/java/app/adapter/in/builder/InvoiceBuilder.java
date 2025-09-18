@@ -24,21 +24,21 @@ public class InvoiceBuilder {
 		User doctor = new User();
 		Order order = new Order();
 
-		patient.setPatientId(Long.parseLong(invoiceValidator.patientIdCardValidator(patientId)));
+		patient.setPatientId(invoiceValidator.patientIdCardValidator(patientId));
 		patient.setFullName(invoiceValidator.patientNameValidator(patientName));
 		patient.setBirthDate(invoiceValidator.patientAgeValidator(patientAge));
 		invoice.setPatientName(patient.getFullName());
-		invoice.setPatientAge((int) patient.getBirthDate());
-		invoice.setPatientIdCard(String.valueOf(patient.getPatientId()));
+		invoice.setPatientAge(patient.getBirthDate());
+		invoice.setPatientIdCard( patient.getPatientId());
 		doctor.setIdCard(invoiceValidator.patientIdCardValidator(doctorId));
 		doctor.setFullName(invoiceValidator.doctorNameValidator(doctorName));
 		invoice.setDoctorName(doctor.getFullName());
 		invoice.setInsuranceName(invoiceValidator.insuranceNameValidator(insuranceName));
 		invoice.setPolicyNumber(invoiceValidator.policyNumberValidator(policyNumber));
-		invoice.setInvoiceId((int) invoiceValidator.invoiceIdValidator(invoiceId));
+		invoice.setInvoiceId( invoiceValidator.invoiceIdValidator(invoiceId));
 		invoice.setDate(invoiceValidator.dateValidator(date));
 		invoice.setTotalAmount(invoiceValidator.totalAmountValidator(totalAmount));
-		order.setOrderNumber((long) invoiceValidator.orderNumberIdValidator(patientId));
+		order.setOrderNumber( invoiceValidator.orderNumberIdValidator(patientId));
 		invoice.setOrder(order);
 		return invoice;
 	}

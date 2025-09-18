@@ -25,7 +25,7 @@ public class MedicUseCase {
    }
    private CreateOrder crearteOrder;
    public void crearteOrder (Order order)throws Exception{
-	   crearteOrder.create(null, null, false, null, order);
+	   crearteOrder.create(0, 0, false, null, order);
    }
    
 } 

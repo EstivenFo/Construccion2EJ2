@@ -3,20 +3,20 @@ package app.domain.model;
 import java.time.LocalDate;
 
 public class Invoice {
-	private int invoiceId;
+	private long invoiceId;
 	private String patientName;
-	private int patientAge;
-	private String patientIdCard;
+	private long patientAge;
+	private long patientIdCard;
 	private String doctorName;
 	private String insuranceName;
 	private String policyNumber;
 	private LocalDate date;
 	private double totalAmount;
 	private Order order;
-	public int getInvoiceId() {
+	public long getInvoiceId() {
 		return invoiceId;
 	}
-	public void setInvoiceId(int invoiceId) {
+	public void setInvoiceId(long invoiceId) {
 		this.invoiceId = invoiceId;
 	}
 	public String getPatientName() {
@@ -25,16 +25,16 @@ public class Invoice {
 	public void setPatientName(String patientName) {
 		this.patientName = patientName;
 	}
-	public int getPatientAge() {
+	public long getPatientAge() {
 		return patientAge;
 	}
-	public void setPatientAge(int patientAge) {
+	public void setPatientAge(long patientAge) {
 		this.patientAge = patientAge;
 	}
-	public String getPatientIdCard() {
+	public long getPatientIdCard() {
 		return patientIdCard;
 	}
-	public void setPatientIdCard(String patientIdCard) {
+	public void setPatientIdCard(long patientIdCard) {
 		this.patientIdCard = patientIdCard;
 	}
 	public String getDoctorName() {
@@ -74,5 +74,5 @@ public class Invoice {
 		this.order = order;
 	}
 	
-
+	
 }

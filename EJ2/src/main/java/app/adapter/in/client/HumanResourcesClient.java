@@ -62,8 +62,8 @@ public class HumanResourcesClient {
 		user.setFullName(sc.nextLine());
 
 		System.out.print("Cédula: ");
-		user.setIdCard(sc.nextLine());
-		sc.nextLine();
+		user.setIdCard(sc.nextLong());
+		sc.nextLong();
 
 		System.out.print("Email: ");
 		user.setEmail(sc.nextLine());
@@ -85,8 +85,8 @@ public class HumanResourcesClient {
 		User user = new User();
 
 		System.out.print("Cédula del empleado a actualizar: ");
-		user.setIdCard(sc.nextLine());
-		sc.nextLine();
+		user.setIdCard(sc.nextLong());
+		sc.nextLong();
 
 		System.out.print("Nuevo nombre completo: ");
 		user.setFullName(sc.nextLine());
@@ -109,8 +109,8 @@ public class HumanResourcesClient {
 
 	private void search(Scanner sc) throws Exception {
 		System.out.print("Ingrese la cédula: ");
-		String idCard = sc.nextLine();
-		sc.nextLine();
+		long idCard = sc.nextLong();
+		sc.nextLong();
 
 		User user = createUser.searchById(idCard);
 		System.out.println("Empleado encontrado: " + user);

@@ -6,8 +6,8 @@ import java.util.List;
 
 public class Order {
 	private long orderNumber;
-	private String patientId;
-	private String doctorId;
+	private long patientId;
+	private long doctorId;
 	private LocalDate creationDate;
 	private List<OrderItem> items = new ArrayList<>();
 
@@ -19,19 +19,19 @@ public class Order {
 		this.orderNumber = orderNumber;
 	}
 
-	public String getPatientId() {
+	public long getPatientId() {
 		return patientId;
 	}
 
-	public void setPatientId(String patientId) {
+	public void setPatientId(long patientId) {
 		this.patientId = patientId;
 	}
 
-	public String getDoctorId() {
+	public long getDoctorId() {
 		return doctorId;
 	}
 
-	public void setDoctorId(String doctorId) {
+	public void setDoctorId(long doctorId) {
 		this.doctorId = doctorId;
 	}
 

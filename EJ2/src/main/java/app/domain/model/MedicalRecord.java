@@ -2,7 +2,7 @@ package app.domain.model;
 
 public class MedicalRecord {
 	private String date;
-	private String doctorId;
+	private long doctorId;
 	private String consultationReason;
 	private String symptoms;
 	private String diagnosis;
@@ -16,11 +16,11 @@ public class MedicalRecord {
 		this.date = date;
 	}
 
-	public String getDoctorId() {
+	public long getDoctorId() {
 		return doctorId;
 	}
 
-	public void setDoctorId(String doctorId) {
+	public void setDoctorId(long doctorId) {
 		this.doctorId = doctorId;
 	}
 

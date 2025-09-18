@@ -32,7 +32,8 @@ public class MedicClient {
 	private SearchMedicalRecordByPatient searchMedicalRecordByPatient;
 
 	private final Scanner reader = new Scanner(System.in);
-	private User currentDoctor;
+
+	private User currentDoctor; // ✅ ahora es User, no long
 
 	// Simulamos autenticación del médico
 	public void login(User doctor) {
@@ -43,15 +44,17 @@ public class MedicClient {
 	public void createOrderForPatient() {
 		try {
 			System.out.println("Ingrese el ID del paciente:");
-			String patientId = reader.nextLine();
+			long patientId = reader.nextLong();
+			reader.nextLine(); // limpiar buffer
 
 			System.out.println("¿Requiere hospitalización? (true/false):");
 			boolean requiresHospitalization = Boolean.parseBoolean(reader.nextLine());
 
 			Order order = new Order();
 
-			createOrder.create(patientId, String.valueOf(currentDoctor.getIdCard()), requiresHospitalization,
-					currentDoctor, order);
+			createOrder.create(patientId, currentDoctor.getIdCard(), // ✅ doctorId
+					requiresHospitalization, currentDoctor, // ✅ User para validar rol
+					order);
 
 			System.out.println("✅ Orden médica creada exitosamente.");
 		} catch (Exception e) {
@@ -66,7 +69,7 @@ public class MedicClient {
 			String patientId = reader.nextLine();
 
 			Record record = new Record();
-			record.setDoctorId(currentDoctor.getIdCard());
+			record.setDoctorId(currentDoctor.getIdCard()); // ✅ usamos doctorId del User
 
 			System.out.println("Ingrese diagnóstico:");
 			record.setDiagnosis(reader.nextLine());
@@ -74,7 +77,7 @@ public class MedicClient {
 			System.out.println("Ingrese tratamiento:");
 			record.setTreatment(reader.nextLine());
 
-			// ⚠️ CreateRecord espera (String, Record, User)
+			// CreateRecord espera (String patientId, Record, User)
 			createRecord.create(patientId, record, currentDoctor);
 
 			System.out.println("✅ Registro clínico creado exitosamente.");
@@ -98,7 +101,7 @@ public class MedicClient {
 			System.out.println("Ingrese nuevo tratamiento:");
 			record.setTreatment(reader.nextLine());
 
-			// ⚠️ UpdateRecord espera (String, Record, User)
+			// UpdateRecord espera (String, Record, User)
 			updateRecord.updateRecord(patientId, record, currentDoctor);
 
 			System.out.println("✅ Registro clínico actualizado exitosamente.");
@@ -116,7 +119,7 @@ public class MedicClient {
 			Patient patient = new Patient();
 			patient.setPatientId(Long.parseLong(patientId));
 
-			// ⚠️ SearchMedicalRecordByPatient espera (Patient, User)
+			// SearchMedicalRecordByPatient espera (Patient, User)
 			List<MedicalRecord> records = searchMedicalRecordByPatient.search(patient, currentDoctor);
 
 			System.out.println("📋 Historia clínica del paciente:");

@@ -150,8 +150,8 @@ public class AdminStaffClient {
 		appointment.setPatient(patient);
 
 		System.out.print("Doctor asignado (ID numérico): ");
-		String doctorId = sc.nextLine();
-		sc.nextLine();
+		long doctorId = sc.nextLong();
+		sc.nextLong();
 
 		User doctor = new User();
 		doctor.setIdCard(doctorId);
@@ -184,7 +184,7 @@ public class AdminStaffClient {
 		sc.nextLine();
 
 		System.out.print("ID del paciente: ");
-		invoice.setPatientIdCard(sc.nextLine());
+		invoice.setPatientIdCard(sc.nextLong());
 
 		System.out.print("Nombre del doctor: ");
 		invoice.setDoctorName(sc.nextLine());

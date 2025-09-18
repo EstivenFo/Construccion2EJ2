@@ -5,14 +5,13 @@ import app.domain.model.enums.Role;
 
 public class User {
 	private String fullName;
-	private String idCard;
+	private long idCard;
 	private String email;
 	private long phone;
 	private long birthDate;
 	private String address;
 	private Role role;
 	private Gender gender;
-	
 
 	public String getFullName() {
 		return fullName;
@@ -22,11 +21,11 @@ public class User {
 		this.fullName = fullName;
 	}
 
-	public String getIdCard() {
+	public long getIdCard() {
 		return idCard;
 	}
 
-	public void setIdCard(String idCard) {
+	public void setIdCard(long idCard) {
 		this.idCard = idCard;
 	}
 

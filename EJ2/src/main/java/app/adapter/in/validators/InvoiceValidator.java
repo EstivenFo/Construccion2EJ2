@@ -17,12 +17,12 @@ public class InvoiceValidator extends SimpleValidator {
         return stringValidator("nombre del paciente", value);
     }
 
-    public int patientAgeValidator(String value) throws Exception {
-        return intValidator("edad del paciente", value);
+    public long patientAgeValidator(String value) throws Exception {
+        return longValidator("edad del paciente", value);
     }
 
-    public String patientIdCardValidator(String value) throws Exception {
-        return stringValidator("cédula del paciente", value);
+    public long patientIdCardValidator(String value) throws Exception {
+        return longValidator("cédula del paciente", value);
     }
 
     public String doctorNameValidator(String value) throws Exception {
