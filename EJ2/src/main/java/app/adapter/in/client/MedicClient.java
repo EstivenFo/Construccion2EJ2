@@ -124,7 +124,7 @@ public class MedicClient {
 
 			System.out.println("📋 Historia clínica del paciente:");
 			for (MedicalRecord rec : records) {
-				System.out.println("- Fecha: " + rec.getDate());
+				System.out.println("- Fecha: " + rec.getCreationDate());
 				System.out.println("  Diagnóstico: " + rec.getDiagnosis());
 				System.out.println("  Tratamiento: " + rec.getTreatment());
 				System.out.println("-----------------------------------");

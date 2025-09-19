@@ -1,12 +1,34 @@
 package app.domain.model;
 
+import java.time.LocalDateTime;
+
 public class Visit {
+	private long UserId;
+	private long PatientId;
+	private LocalDateTime dateTime;
 	private String bloodPressure;
     private double temperature;
     private int pulse;
     private int oxygenLevel;
     private String observations;
-    
+	public long getUserId() {
+		return UserId;
+	}
+	public void setUserId(long userId) {
+		UserId = userId;
+	}
+	public long getPatientId() {
+		return PatientId;
+	}
+	public void setPatientId(long patientId) {
+		PatientId = patientId;
+	}
+	public LocalDateTime getDateTime() {
+		return dateTime;
+	}
+	public void setDateTime(LocalDateTime dateTime) {
+		this.dateTime = dateTime;
+	}
 	public String getBloodPressure() {
 		return bloodPressure;
 	}
