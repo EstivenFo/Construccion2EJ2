@@ -1,7 +1,6 @@
 package app.infrastructure.persistence.entities;
 
 import app.domain.model.enums.Gender;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -11,13 +10,13 @@ public class PatientEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "patient_id")
-    private Long patientId;
+    private long id;   // <-- Cambié patientId por id
 
     @Column(name = "full_name", nullable = false, length = 100)
     private String fullName;
 
     @Column(name = "birth_date", nullable = false)
-    private long birthDate; // ⚠️ Se recomienda usar LocalDate
+    private long birthDate;  // ⚠️ recomendado: LocalDate en lugar de long
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 10)
@@ -32,27 +31,26 @@ public class PatientEntity {
     @Column(nullable = false, unique = true, length = 100)
     private String email;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private UserEntity user;
 
-    @Column(name = "emergency_contact", nullable = false, length = 100)
+    @Column(name = "emergency_contact", length = 100)
     private String emergencyContact;
 
-    @Column(name = "emergency_contact_relationship", nullable = false, length = 50)
+    @Column(name = "emergency_contact_relationship", length = 50)
     private String emergencyContactRelationship;
 
-    @Column(name = "emergency_contact_number", nullable = false)
+    @Column(name = "emergency_contact_number")
     private long emergencyContactNumber;
 
     // Getters y Setters
-
-    public Long getPatientId() {
-        return patientId;
+    public Long getId() {   // <-- Ahora getter es getId()
+        return id;
     }
 
-    public void setPatientId(Long patientId) {
-        this.patientId = patientId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFullName() {
@@ -95,20 +93,20 @@ public class PatientEntity {
         this.phone = phone;
     }
 
-    public UserEntity getUser() {
-        return user;
-    }
-
-    public void setUser(UserEntity user) {
-        this.user = user;
-    }
-
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 
     public String getEmergencyContact() {
@@ -134,4 +132,5 @@ public class PatientEntity {
     public void setEmergencyContactNumber(long emergencyContactNumber) {
         this.emergencyContactNumber = emergencyContactNumber;
     }
-}
+
+	}

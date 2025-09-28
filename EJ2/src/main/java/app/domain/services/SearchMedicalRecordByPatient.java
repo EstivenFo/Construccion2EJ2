@@ -8,6 +8,9 @@ import app.domain.ports.MedicalRecordPort;
 import app.domain.ports.PatientPort;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class SearchMedicalRecordByPatient {
 	private PatientPort PatientPort;
 	private MedicalRecordPort medicalRecordPort;

@@ -20,77 +20,75 @@ import app.domain.model.enums.Status;
 @Table(name = "appointments")
 public class AppointmentEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    // Relación con paciente
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "patient_id", nullable = false)
-    private PatientEntity patient;
+	@ManyToOne(fetch = FetchType.LAZY) // relación con patient
+	@JoinColumn(name = "patient_id")
+	private PatientEntity patient;
 
-    // Relación con doctor
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "doctorId", nullable = false)
-    private UserEntity doctorId;
+	@ManyToOne(fetch = FetchType.LAZY) // relación con doctor (usuario)
+	@JoinColumn(name = "doctor_id")
+	private UserEntity doctor;
 
-    @Column(nullable = false)
-    private LocalDateTime date;
+	@Column(nullable = false)
+	private LocalDateTime date;
 
-    @Column(nullable = false, length = 255)
-    private String reason;
+	@Column(nullable = false, length = 255)
+	private String reason;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 20)
-    private Status status;
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false, length = 20)
+	private Status status;
 
-    // Getters and Setters
+	// Getters and Setters
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public PatientEntity getPatient() {
-        return patient;
-    }
+	public PatientEntity getPatient() {
+		return patient;
+	}
 
-    public void setPatient(PatientEntity patient) {
-        this.patient = patient;
-    }
+	public void setPatient(PatientEntity patient) {
+		this.patient = patient;
+	}
 
-    public UserEntity getDoctor() {
-        return doctorId;
-    }
+	public UserEntity getDoctor() {
+		return doctor;
+	}
 
-    public void setDoctor(UserEntity doctor) {
-        this.doctorId = doctor;
-    }
+	public void setDoctor(UserEntity doctor) {
+		this.doctor = doctor;
+	}
 
-    public LocalDateTime getDate() {
-        return date;
-    }
+	public LocalDateTime getDate() {
+		return date;
+	}
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
-    }
+	public void setDate(LocalDateTime date) {
+		this.date = date;
+	}
 
-    public String getReason() {
-        return reason;
-    }
+	public String getReason() {
+		return reason;
+	}
 
-    public void setReason(String reason) {
-        this.reason = reason;
-    }
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
 
-    public Status getStatus() {
-        return status;
-    }
+	public Status getStatus() {
+		return status;
+	}
 
-    public void setStatus(Status status) {
-        this.status = status;
-    }
+	public void setStatus(Status status) {
+		this.status = status;
+	}
 }

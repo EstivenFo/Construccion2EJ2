@@ -13,16 +13,9 @@ import app.domain.services.UpdateUser;
 @Controller
 public class HumanResourcesClient {
 	@Autowired
-	private  CreateUser createUser;
-	@Autowired
-	private  UpdateUser updateUser;
+	private CreateUser createUser;
+	private UpdateUser updateUser;
 
-	
-	public HumanResourcesClient(CreateUser createUser, UpdateUser updateUser) {
-		this.createUser = createUser;
-		this.updateUser = updateUser;
-	}
-	
 	private static final String MENU = """
 			=== Menú Recursos Humanos ===
 			1. Crear empleado

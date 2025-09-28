@@ -32,7 +32,7 @@ public class AppointmentMapper {
         domain.setId(entity.getId());
 
         // Relaciones
-        domain.setPatient(PatientMapper.toDomain(entity.getPatient()));
+		domain.setPatient(PatientMapper.toDomain(entity.getPatient()));
         domain.setDoctor(UserMapper.toDomain(entity.getDoctor()));
 
         // Propiedades simples

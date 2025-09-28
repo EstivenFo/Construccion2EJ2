@@ -37,22 +37,20 @@ public class CreateOrder {
 
 		// Hospitalización como procedimiento (si aplica)
 		if (requiresHospitalization) {
-			order.addItem(new OrderItem("Procedimiento", "Hospitalización del paciente",
-					"Ingreso en sala general bajo observación continua"));
+			order.addItem(new OrderItem());
 		}
 
 		// Procedimientos de enfermería
-		order.addItem(new OrderItem("Procedimiento", "Visita de enfermería", "Control de signos vitales cada 4 horas"));
-		order.addItem(new OrderItem("Procedimiento", "Intervenciones de enfermería",
-				"Administración de medicamentos y cuidado general"));
+		order.addItem(new OrderItem());
+		order.addItem(new OrderItem());
 
 		// Medicamentos recetados
-		order.addItem(new OrderItem("Medicamento", "Paracetamol 500mg", "Cada 8 horas vía oral"));
-		order.addItem(new OrderItem("Medicamento", "Amoxicilina 875mg", "Cada 12 horas vía oral durante 7 días"));
-		order.addItem(new OrderItem("Medicamento", "Solución salina 0.9%", "Aplicación intravenosa según necesidad"));
+		order.addItem(new OrderItem());
+		order.addItem(new OrderItem());
+		order.addItem(new OrderItem());
 
 		// Ayuda diagnóstica
-		order.addItem(new OrderItem("Ayuda", "Radiografía de tórax", "Evaluar estado pulmonar"));
+		order.addItem(new OrderItem());
 
 		// Guardar en el repositorio
 		orderPort.save(order);

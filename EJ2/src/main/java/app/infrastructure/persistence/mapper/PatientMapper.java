@@ -1,51 +1,67 @@
 package app.infrastructure.persistence.mapper;
 
+import org.springframework.stereotype.Component;
+
 import app.domain.model.Patient;
 import app.infrastructure.persistence.entities.PatientEntity;
 
+@Component
 public class PatientMapper {
 
-    // Dominio → Entidad
-    public static PatientEntity toEntity(Patient domain) {
-        if (domain == null) return null;
+    // Domain -> Entity
+    public static PatientEntity toEntity(Patient patient) {
+        if (patient == null) {
+            return null;
+        }
 
         PatientEntity entity = new PatientEntity();
-        entity.setPatientId(domain.getPatientId());
-        entity.setFullName(domain.getFullName());
-        entity.setBirthDate(domain.getBirthDate());
-        entity.setGender(domain.getGender());
-        entity.setAddress(domain.getAddress());
-        entity.setPhone(domain.getPhone());
-        entity.setEmail(domain.getEmail());
-        entity.setEmergencyContact(domain.getEmergencyContact());
-        entity.setEmergencyContactRelationship(domain.getEmergencyContactRelationship());
-        entity.setEmergencyContactNumber(domain.getEmergencyContactNumber());
+        
+        // ⚠️ Ajusta según tu entidad (usa setId si cambiaste el campo)
+        entity.setId(patient.getPatientId());
+        entity.setFullName(patient.getFullName());
+        entity.setBirthDate(patient.getBirthDate());
+        entity.setGender(patient.getGender());
+        entity.setAddress(patient.getAddress());
+        entity.setPhone(patient.getPhone());
+        entity.setEmail(patient.getEmail());
+        entity.setEmergencyContact(patient.getEmergencyContact());
+        entity.setEmergencyContactRelationship(patient.getEmergencyContactRelationship());
+        entity.setEmergencyContactNumber(patient.getEmergencyContactNumber());
 
-        // Relación con User (se delega al mapper)
-        entity.setUser(UserMapper.toEntity(domain.getUser()));
+        // Relación con User
+        if (patient.getUser() != null) {
+            entity.setUser(UserMapper.toEntity(patient.getUser())); 
+        }
 
         return entity;
     }
 
-    // Entidad → Dominio
+    // Entity -> Domain
     public static Patient toDomain(PatientEntity entity) {
-        if (entity == null) return null;
+        if (entity == null) {
+            return null;
+        }
 
-        Patient domain = new Patient();
-        domain.setPatientId(entity.getPatientId());
-        domain.setFullName(entity.getFullName());
-        domain.setBirthDate(entity.getBirthDate());
-        domain.setGender(entity.getGender());
-        domain.setAddress(entity.getAddress());
-        domain.setPhone(entity.getPhone());
-        domain.setEmail(entity.getEmail());
-        domain.setEmergencyContact(entity.getEmergencyContact());
-        domain.setEmergencyContactRelationship(entity.getEmergencyContactRelationship());
-        domain.setEmergencyContactNumber(entity.getEmergencyContactNumber());
+        Patient patient = new Patient();
+        
+        // ⚠️ Ajusta según tu entidad (usa getId si cambiaste el campo)
+        patient.setPatientId(entity.getId());
+        patient.setFullName(entity.getFullName());
+        patient.setBirthDate(entity.getBirthDate());
+        patient.setGender(entity.getGender());
+        patient.setAddress(entity.getAddress());
+        patient.setPhone(entity.getPhone());
+        patient.setEmail(entity.getEmail());
+        patient.setEmergencyContact(entity.getEmergencyContact());
+        patient.setEmergencyContactRelationship(entity.getEmergencyContactRelationship());
+        patient.setEmergencyContactNumber(entity.getEmergencyContactNumber());
 
         // Relación con User
-        domain.setUser(UserMapper.toDomain(entity.getUser()));
+        if (entity.getUser() != null) {
+            patient.setUser(UserMapper.toDomain(entity.getUser()));
+        }
 
-        return domain;
+        return patient;
     }
 }
+

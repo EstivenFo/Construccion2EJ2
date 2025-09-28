@@ -1,8 +1,11 @@
 package app.infrastructure.persistence.mapper;
 
+import org.springframework.stereotype.Component;
+
 import app.domain.model.User;
 import app.infrastructure.persistence.entities.UserEntity;
 
+@Component
 public class UserMapper {
 
     // Dominio → Entidad

@@ -1,47 +1,60 @@
 package app.domain.services;
 
-import java.time.LocalDateTime;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import app.domain.model.Appointment;
-import app.domain.ports.AppointmentPort;
-import app.domain.model.enums.Role;
 import app.domain.model.User;
+import app.domain.model.enums.Role;
+import app.domain.ports.AppointmentPort;
 
 @Service
 public class CreateAppointment {
-	@Autowired
-	private AppointmentPort appointmentPort;
 
-	// Crear una nueva cita
-	public void create(Appointment appointment, User user) throws Exception {
-		// Validar que el objeto no sea nulo
-		if (appointment == null) {
-			throw new IllegalArgumentException("La cita no puede ser nula");
-		}
+    private final AppointmentPort appointmentPort;
 
-		// Validar fecha de la cita
-		LocalDateTime appointmentDate = appointment.getDate();
-		if (appointmentDate == null || appointmentDate.isBefore(LocalDateTime.now())) {
-			throw new Exception("La fecha de la cita no es válida");
-		}
+    // Inyección por constructor (mejor práctica)
+    public CreateAppointment(AppointmentPort appointmentPort) {
+        this.appointmentPort = appointmentPort;
+    }
 
-		// Validar que el doctor no tenga otra cita en la misma fecha/hora
-		List<Appointment> doctorAppointments = appointmentPort.searchByDoctorId(appointment.getDoctor());
+    // Crear nueva cita
+    public void create(Appointment appointment, User ADMINISTRATIVESTAFF) throws Exception {
+        if (appointment == null) {
+            throw new IllegalArgumentException("La cita no puede ser nula.");
+        }
+        appointmentPort.save(appointment);
+    }
 
-		for (Appointment appt : doctorAppointments) {
-			if (appt.getDate().equals(appointmentDate)) {
-				throw new Exception("El doctor ya tiene una cita en esa fecha y hora");
-			}
-			if (!(user.getRole() == Role.MEDIC || user.getRole() == Role.HUMANRESOURCES)) {
-			    throw new SecurityException("Solo el personal administrador puede crear citas");
-			}
-		}
+    // Buscar cita por paciente
+    public Appointment getByPatient(Long patientId) throws Exception {
+        if (patientId == null || patientId <= 0) {
+            throw new IllegalArgumentException("El ID del paciente no es válido.");
+        }
+        return appointmentPort.searchByPatientId(patientId);
+    }
 
-		// Guardar la cita
-		appointmentPort.save(appointment);
-	}
+    // Buscar cita por doctor
+    public Appointment getByDoctor(Long doctorId) throws Exception {
+        if (doctorId == null || doctorId <= 0) {
+            throw new IllegalArgumentException("El ID del doctor no es válido.");
+        }
+        return appointmentPort.searchByDoctorId(doctorId);
+    }
+
+    // Actualizar cita
+    public void update(Appointment appointment, User ADMINISTRATIVESTAFF) throws Exception {
+        if (appointment == null) {
+            throw new IllegalArgumentException("La cita no es válida para actualizar.");
+        }
+        if (ADMINISTRATIVESTAFF == null || !ADMINISTRATIVESTAFF.getRole().equals(Role.ADMINISTRATIVESTAFF)) {
+            throw new IllegalArgumentException("Solo un administrador puede crear citas.");
+        }
+        appointmentPort.update(appointment);
+    }
+
+    // Listar todas las citas
+    public List<Appointment> getAll() throws Exception {
+        return appointmentPort.findAll();
+    }
 }

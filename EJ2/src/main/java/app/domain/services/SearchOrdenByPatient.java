@@ -9,6 +9,9 @@ import app.domain.ports.PatientPort;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class SearchOrdenByPatient {
 
 	private PatientPort patientPort;

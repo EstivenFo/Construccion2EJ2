@@ -29,6 +29,6 @@ public class UpdateRecord {
         }
 
         // Delegar la actualización
-        recordPort.update(patientId, record);
+        recordPort.update(record);
     }
 }

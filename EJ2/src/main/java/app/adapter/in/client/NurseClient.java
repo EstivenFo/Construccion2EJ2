@@ -31,8 +31,6 @@ public class NurseClient {
 
 	@Autowired
 	private SearchPatient searchPatient;
-
-	@Autowired
 	private User nurseUser;
 
 	public NurseClient() {

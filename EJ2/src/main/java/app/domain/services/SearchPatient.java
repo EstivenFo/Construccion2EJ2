@@ -2,11 +2,13 @@ package app.domain.services;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import app.domain.model.Patient;
 import app.domain.ports.PatientPort;
 import app.domain.model.enums.Role;
 import app.domain.model.User;
-
+@Service
 public class SearchPatient {
 
 	private PatientPort patientPort;

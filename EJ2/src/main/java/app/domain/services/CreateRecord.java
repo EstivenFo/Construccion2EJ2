@@ -28,7 +28,7 @@ public class CreateRecord {
         }
 
         // aquí delegas al puerto
-        recordPort.save(patientId, record);
+        recordPort.save(record);
     }
 }
 

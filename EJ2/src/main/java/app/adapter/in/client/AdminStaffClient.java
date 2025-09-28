@@ -24,22 +24,15 @@ public class AdminStaffClient {
 
 	private static final Scanner sc = new Scanner(System.in);
 	@Autowired
-	private  CreatePatient createPatient;
+	private CreatePatient createPatient;
 	@Autowired
-	private  UpdatePatient updatePatient;
+	private UpdatePatient updatePatient;
 	@Autowired
-	private  CreateAppointment createAppointment;
+	private CreateAppointment createAppointment;
 	@Autowired
-	private  CreateInvoice createInvoice;
-
-	@Autowired
-	public AdminStaffClient(CreatePatient createPatient, UpdatePatient updatePatient,
-			CreateAppointment createAppointment, CreateInvoice createInvoice) {
-		this.createPatient = createPatient;
-		this.updatePatient = updatePatient;
-		this.createAppointment = createAppointment;
-		this.createInvoice = createInvoice;
-	}
+	private CreateInvoice createInvoice;
+	
+	private User adminStaffUser;
 
 	private static final String MENU = """
 			=== Menú Personal Administrativo ===
@@ -49,8 +42,22 @@ public class AdminStaffClient {
 			4. Crear Factura
 			0. Salir
 			""";
+	
+	public AdminStaffClient() {
+		// Por simplicidad, aquí fijo un usuario enfermera
+		this.adminStaffUser = new User();
+		adminStaffUser.setRole(Role.ADMINISTRATIVESTAFF);
+		adminStaffUser.setFullName("Nurse System User");
+	}
 
-	public void run() {
+	public void session() {
+		boolean session = true;
+		while (session) {
+			session = run();
+		}
+	}
+
+	public boolean run() {
 		int opcion;
 		do {
 			System.out.println(MENU);
@@ -70,6 +77,7 @@ public class AdminStaffClient {
 				System.out.println("Error: " + e.getMessage());
 			}
 		} while (opcion != 0);
+		return false;
 	}
 
 	private void crearPaciente() throws Exception {
@@ -151,7 +159,7 @@ public class AdminStaffClient {
 
 		System.out.print("Doctor asignado (ID numérico): ");
 		long doctorId = sc.nextLong();
-		sc.nextLong();
+		sc.nextLine(); // ✅ corregido, antes estaba sc.nextLong()
 
 		User doctor = new User();
 		doctor.setIdCard(doctorId);
@@ -167,8 +175,8 @@ public class AdminStaffClient {
 
 		appointment.setStatus(Status.PENDING);
 
-		User admin = buildAdminUser();
-		createAppointment.create(appointment, admin);
+		User ADMINISTRATIVESTAFF = buildAdminUser();
+		createAppointment.create(appointment, ADMINISTRATIVESTAFF);
 
 		System.out.println("✅ Cita creada con éxito.");
 	}
@@ -185,6 +193,7 @@ public class AdminStaffClient {
 
 		System.out.print("ID del paciente: ");
 		invoice.setPatientIdCard(sc.nextLong());
+		sc.nextLine();
 
 		System.out.print("Nombre del doctor: ");
 		invoice.setDoctorName(sc.nextLine());

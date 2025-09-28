@@ -1,5 +1,7 @@
 package app.infrastructure.persistence.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -7,8 +9,10 @@ import app.infrastructure.persistence.entities.AppointmentEntity;
 
 @Repository
 public interface AppointmentRepository extends JpaRepository<AppointmentEntity, Long> {
-    
-    // Aquí puedes definir queries personalizadas si las necesitas
-    // Ejemplo: buscar todas las citas por doctor
-    // List<AppointmentEntity> findByDoctorId(Long doctorId);
+
+    // ✅ Busca todas las citas por el id del paciente
+    List<AppointmentEntity> findByPatient_Id(Long patientId);
+
+    // ✅ Busca todas las citas por el id del doctor
+    List<AppointmentEntity> findByDoctor_Id(Long doctorId);
 }

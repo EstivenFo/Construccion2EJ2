@@ -13,4 +13,6 @@ public interface PatientPort {
 	public void search(long patientId) throws Exception;
 
 	public void save(Patient patient) throws Exception;
+
+	public Patient  findById(Patient patient) throws Exception;
 }

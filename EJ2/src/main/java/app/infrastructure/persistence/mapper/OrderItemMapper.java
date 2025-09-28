@@ -20,9 +20,6 @@ public class OrderItemMapper {
     // De entidad a dominio
     public static OrderItem toDomain(OrderItemEntity entity) {
         return new OrderItem(
-            entity.getType(),
-            entity.getDescription(),
-            entity.getDetails()
         );
     }
 
