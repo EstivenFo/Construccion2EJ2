@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import app.adapter.in.validators.VisitValidator;
 import app.domain.model.Visit;
-import app.domain.model.User;
+import app.domain.model.Person;
 import app.domain.model.Patient;
 
 @Component
@@ -14,7 +14,7 @@ public class VisitBuilder {
 	@Autowired
 	private VisitValidator visitValidator;
 
-	public Visit builder(Patient patient, User createdBy, // doctor o enfermera
+	public Visit builder(Patient patient, Person createdBy, // doctor o enfermera
 			String bloodPressure, String temperature, String pulse, String oxygenLevel, String observations)
 			throws Exception {
 

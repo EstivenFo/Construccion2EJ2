@@ -3,7 +3,7 @@ package app.domain.services;
 import org.springframework.stereotype.Service;
 
 import app.domain.model.Record;
-import app.domain.model.User;
+import app.domain.model.Person;
 import app.domain.model.enums.Role;
 import app.domain.ports.RecordPort;
 @Service
@@ -12,7 +12,7 @@ public class UpdateRecord {
     private  RecordPort recordPort;
     
     // Actualizar un registro médico (solo MEDIC puede hacerlo)
-    public void updateRecord(String patientId, Record record, User user) throws Exception {
+    public void updateRecord(String patientId, Record record, Person user) throws Exception {
         if (record == null) {
             throw new IllegalArgumentException("El registro no puede ser nulo");
         }

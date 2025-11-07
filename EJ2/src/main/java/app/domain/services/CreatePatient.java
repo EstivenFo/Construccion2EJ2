@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import app.domain.model.Patient;
-import app.domain.model.User;
+import app.domain.model.Person;
 import app.domain.model.enums.Role;
 import app.domain.ports.PatientPort;
 
@@ -14,7 +14,7 @@ public class CreatePatient {
     private  PatientPort patientPort;
 
     // Método para registrar un paciente (solo ADMINISTRATIVESTAFF puede hacerlo)
-    public void create(Patient patient, User user) throws Exception {
+    public void create(Patient patient, Person user) throws Exception {
         if (patient == null) {
             throw new IllegalArgumentException("El paciente no puede ser nulo");
         }

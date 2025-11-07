@@ -3,7 +3,7 @@ package app.domain.services;
 import org.springframework.stereotype.Service;
 
 import app.domain.model.Patient;
-import app.domain.model.User;
+import app.domain.model.Person;
 import app.domain.model.enums.Role;
 import app.domain.ports.PatientPort;
 @Service
@@ -11,7 +11,7 @@ public class UpdatePatient {
     private PatientPort patientPort;
 
     // Ahora recibimos también el usuario que intenta actualizar
-    public void update(User user, Patient patient) throws Exception {
+    public void update(Person user, Patient patient) throws Exception {
 
         // Validar si existe el paciente
         if (patientPort.search(patient) == null) {

@@ -7,7 +7,7 @@ public class Appointment {
 
 	private long id;
 	private Patient patient;
-	private User Doctor;
+	private Person Doctor;
 	private LocalDateTime date;
 	private String reason;
 	private Status status;
@@ -23,10 +23,10 @@ public class Appointment {
 	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}
-	public User getDoctor() {
+	public Person getDoctor() {
 		return Doctor;
 	}
-	public void setDoctor(User doctor) {
+	public void setDoctor(Person doctor) {
 		Doctor = doctor;
 	}
 	public LocalDateTime getDate() {

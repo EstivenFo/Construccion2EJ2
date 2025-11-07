@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import app.domain.model.Appointment;
-import app.domain.model.User;
+import app.domain.model.Person;
 import app.domain.model.enums.Role;
 import app.domain.ports.AppointmentPort;
 
@@ -19,7 +19,7 @@ public class CreateAppointment {
     }
 
     // Crear nueva cita
-    public void create(Appointment appointment, User ADMINISTRATIVESTAFF) throws Exception {
+    public void create(Appointment appointment, Person ADMINISTRATIVESTAFF) throws Exception {
         if (appointment == null) {
             throw new IllegalArgumentException("La cita no puede ser nula.");
         }
@@ -43,7 +43,7 @@ public class CreateAppointment {
     }
 
     // Actualizar cita
-    public void update(Appointment appointment, User ADMINISTRATIVESTAFF) throws Exception {
+    public void update(Appointment appointment, Person ADMINISTRATIVESTAFF) throws Exception {
         if (appointment == null) {
             throw new IllegalArgumentException("La cita no es válida para actualizar.");
         }

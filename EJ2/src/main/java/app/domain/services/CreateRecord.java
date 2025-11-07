@@ -4,14 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import app.domain.model.Record;
-import app.domain.model.User;
+import app.domain.model.Person;
 import app.domain.ports.RecordPort;
 @Service
 public class CreateRecord {
 	@Autowired
     private  RecordPort recordPort;
 
-    public void create(String patientId, Record record, User user) throws Exception {
+    public void create(String patientId, Record record, Person user) throws Exception {
         if (patientId == null || patientId.isEmpty()) {
             throw new IllegalArgumentException("El paciente es obligatorio");
         }

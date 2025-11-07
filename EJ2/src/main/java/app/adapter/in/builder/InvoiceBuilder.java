@@ -7,7 +7,7 @@ import app.adapter.in.validators.InvoiceValidator;
 import app.domain.model.Invoice;
 import app.domain.model.Order;
 import app.domain.model.Patient;
-import app.domain.model.User;
+import app.domain.model.Person;
 
 @Component
 public class InvoiceBuilder {
@@ -21,7 +21,7 @@ public class InvoiceBuilder {
 
 		Invoice invoice = new Invoice();
 		Patient patient = new Patient();
-		User doctor = new User();
+		Person doctor = new Person();
 		Order order = new Order();
 
 		patient.setPatientId(invoiceValidator.patientIdCardValidator(patientId));

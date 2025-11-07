@@ -5,7 +5,7 @@ import java.util.Scanner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import app.domain.model.User;
+import app.domain.model.Person;
 import app.domain.model.enums.Role;
 import app.domain.services.CreateUser;
 import app.domain.services.UpdateUser;
@@ -50,7 +50,7 @@ public class HumanResourcesClient {
 	}
 
 	private void create(Scanner sc) throws Exception {
-		User user = new User();
+		Person user = new Person();
 		System.out.print("Nombre completo: ");
 		user.setFullName(sc.nextLine());
 
@@ -75,7 +75,7 @@ public class HumanResourcesClient {
 	}
 
 	private void update(Scanner sc) throws Exception {
-		User user = new User();
+		Person user = new Person();
 
 		System.out.print("Cédula del empleado a actualizar: ");
 		user.setIdCard(sc.nextLong());
@@ -105,7 +105,7 @@ public class HumanResourcesClient {
 		long idCard = sc.nextLong();
 		sc.nextLong();
 
-		User user = createUser.searchById(idCard);
+		Person user = createUser.searchById(idCard);
 		System.out.println("Empleado encontrado: " + user);
 	}
 }

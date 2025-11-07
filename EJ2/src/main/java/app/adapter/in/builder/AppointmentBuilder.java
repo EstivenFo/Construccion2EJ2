@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import app.adapter.in.validators.AppointmentValidator;
 import app.domain.model.Appointment;
 import app.domain.model.Patient;
-import app.domain.model.User;
+import app.domain.model.Person;
 import app.domain.model.enums.Status;
 
 import java.time.LocalDateTime;
@@ -22,7 +22,7 @@ public class AppointmentBuilder {
 
 		Appointment appointment = new Appointment();
 		Patient patient = new Patient();
-		User doctor = new User();
+		Person doctor = new Person();
 
 		// Validaciones y asignaciones
 		patient.setPatientId(appointmentValidator.patientIdValidator(patientId));

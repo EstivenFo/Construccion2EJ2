@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import app.adapter.in.validators.PatientValidator;
 import app.adapter.in.validators.UserValidator;
 import app.domain.model.Patient;
-import app.domain.model.User;
+import app.domain.model.Person;
 import app.domain.model.enums.Gender;
 
 @Component
@@ -22,7 +22,7 @@ public class PatientBuilder {
 			String emergencyContactNumber) throws Exception {
 
 		// --- CREAR Y VALIDAR USUARIO ---
-		User user = new User();
+		Person user = new Person();
 		user.setIdCard(userValidator.idCardValidator(patientId));
 		user.setFullName(userValidator.fullNameValidator(fullName));
 		user.setEmail(userValidator.emailValidator(email));

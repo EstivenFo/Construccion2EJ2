@@ -3,7 +3,7 @@ package app.domain.services;
 import app.domain.model.Order;
 import app.domain.model.enums.Role;
 import app.domain.model.Patient;
-import app.domain.model.User;
+import app.domain.model.Person;
 import app.domain.ports.OrderPort;
 import app.domain.ports.PatientPort;
 
@@ -17,7 +17,7 @@ public class SearchOrdenByPatient {
 	private PatientPort patientPort;
 	private OrderPort orderPort;
 
-	public List<Order> search(Patient patient, User user) throws Exception {
+	public List<Order> search(Patient patient, Person user) throws Exception {
 		patient = patientPort.search(patient);
 		if (patient == null) {
 			throw new Exception("debe consultar ordenes de un paciente registrado");

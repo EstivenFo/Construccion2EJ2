@@ -6,7 +6,7 @@ import java.util.List;
 
 import app.adapter.in.validators.RecordValidator;
 import app.domain.model.Record;
-import app.domain.model.User;
+import app.domain.model.Person;
 
 @Component
 public class RecordBuilder {
@@ -18,8 +18,8 @@ public class RecordBuilder {
 			String diagnosis, String treatment, List<String> tests, List<String> prescriptions, String notes) throws Exception {
 
 		Record record = new Record();
-		User doctor = new User();
-		User patient = new User();
+		Person doctor = new Person();
+		Person patient = new Person();
 
 		// === VALIDACIONES ===
 		doctor.setIdCard(recordValidator.doctorIdValidator(doctorId));

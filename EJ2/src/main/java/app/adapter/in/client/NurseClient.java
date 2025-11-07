@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import app.domain.model.Patient;
-import app.domain.model.User;
+import app.domain.model.Person;
 import app.domain.model.Visit;
 import app.domain.model.Order;
 import app.domain.model.enums.Role;
@@ -31,11 +31,11 @@ public class NurseClient {
 
 	@Autowired
 	private SearchPatient searchPatient;
-	private User nurseUser;
+	private Person nurseUser;
 
 	public NurseClient() {
 		// Por simplicidad, aquí fijo un usuario enfermera
-		this.nurseUser = new User();
+		this.nurseUser = new Person();
 		nurseUser.setRole(Role.NURSE);
 		nurseUser.setFullName("Nurse System User");
 	}

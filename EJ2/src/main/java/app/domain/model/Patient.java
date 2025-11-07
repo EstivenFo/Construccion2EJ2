@@ -9,7 +9,7 @@ public class Patient {
 	private Gender gender;
 	private String address;
 	private long phone;
-	private User user;
+	private Person user;
 	private String email;
 	private String emergencyContact;
 	private String emergencyContactRelationship;
@@ -63,11 +63,11 @@ public class Patient {
 		this.phone = phone;
 	}
 
-	public User getUser() {
+	public Person getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(Person user) {
 		this.user = user;
 	}
 

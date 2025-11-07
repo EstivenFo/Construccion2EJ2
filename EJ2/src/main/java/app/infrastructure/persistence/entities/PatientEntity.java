@@ -4,7 +4,7 @@ import app.domain.model.enums.Gender;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "patients")
+@Table(name = "patient")
 public class PatientEntity {
 
     @Id

@@ -2,14 +2,14 @@ package app.infrastructure.persistence.mapper;
 
 import org.springframework.stereotype.Component;
 
-import app.domain.model.User;
+import app.domain.model.Person;
 import app.infrastructure.persistence.entities.UserEntity;
 
 @Component
 public class UserMapper {
 
     // Dominio → Entidad
-    public static UserEntity toEntity(User domain) {
+    public static UserEntity toEntity(Person domain) {
         if (domain == null) return null;
 
         UserEntity entity = new UserEntity();
@@ -26,10 +26,10 @@ public class UserMapper {
     }
 
     // Entidad → Dominio
-    public static User toDomain(UserEntity entity) {
+    public static Person toDomain(UserEntity entity) {
         if (entity == null) return null;
 
-        User domain = new User();
+        Person domain = new Person();
         domain.setIdCard(entity.getIdCard());
         domain.setFullName(entity.getFullName());
         domain.setEmail(entity.getEmail());

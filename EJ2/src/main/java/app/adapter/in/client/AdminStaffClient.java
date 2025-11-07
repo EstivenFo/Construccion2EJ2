@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import app.domain.model.Patient;
 import app.domain.model.Appointment;
 import app.domain.model.Invoice;
-import app.domain.model.User;
+import app.domain.model.Person;
 import app.domain.model.enums.Gender;
 import app.domain.model.enums.Role;
 import app.domain.model.enums.Status;
@@ -32,7 +32,7 @@ public class AdminStaffClient {
 	@Autowired
 	private CreateInvoice createInvoice;
 	
-	private User adminStaffUser;
+	private Person adminStaffUser;
 
 	private static final String MENU = """
 			=== Menú Personal Administrativo ===
@@ -45,7 +45,7 @@ public class AdminStaffClient {
 	
 	public AdminStaffClient() {
 		// Por simplicidad, aquí fijo un usuario enfermera
-		this.adminStaffUser = new User();
+		this.adminStaffUser = new Person();
 		adminStaffUser.setRole(Role.ADMINISTRATIVESTAFF);
 		adminStaffUser.setFullName("Nurse System User");
 	}
@@ -86,7 +86,7 @@ public class AdminStaffClient {
 		System.out.print("Nombre completo: ");
 		patient.setFullName(sc.nextLine());
 
-		System.out.print("Fecha de nacimiento (YYYYMMDD): ");
+		System.out.print("Fecha de nacimiento (YYYY/MM/DD): ");
 		patient.setBirthDate(sc.nextLong());
 		sc.nextLine();
 
@@ -114,7 +114,7 @@ public class AdminStaffClient {
 		patient.setEmergencyContactNumber(sc.nextLong());
 		sc.nextLine();
 
-		User admin = buildAdminUser();
+		Person admin = buildAdminUser();
 		createPatient.create(patient, admin);
 
 		System.out.println("✅ Paciente creado con éxito.");
@@ -140,7 +140,7 @@ public class AdminStaffClient {
 		System.out.print("Nuevo email: ");
 		patient.setEmail(sc.nextLine());
 
-		User admin = buildAdminUser();
+		Person admin = buildAdminUser();
 		updatePatient.update(admin, patient);
 
 		System.out.println("✅ Paciente actualizado con éxito.");
@@ -161,7 +161,7 @@ public class AdminStaffClient {
 		long doctorId = sc.nextLong();
 		sc.nextLine(); // ✅ corregido, antes estaba sc.nextLong()
 
-		User doctor = new User();
+		Person doctor = new Person();
 		doctor.setIdCard(doctorId);
 		doctor.setRole(Role.MEDIC);
 		appointment.setDoctor(doctor);
@@ -175,7 +175,7 @@ public class AdminStaffClient {
 
 		appointment.setStatus(Status.PENDING);
 
-		User ADMINISTRATIVESTAFF = buildAdminUser();
+		Person ADMINISTRATIVESTAFF = buildAdminUser();
 		createAppointment.create(appointment, ADMINISTRATIVESTAFF);
 
 		System.out.println("✅ Cita creada con éxito.");
@@ -210,14 +210,14 @@ public class AdminStaffClient {
 		invoice.setTotalAmount(sc.nextDouble());
 		sc.nextLine();
 
-		User admin = buildAdminUser();
+		Person admin = buildAdminUser();
 		createInvoice.create(invoice, admin);
 
 		System.out.println("✅ Factura creada con éxito.");
 	}
 
-	private User buildAdminUser() {
-		User admin = new User();
+	private Person buildAdminUser() {
+		Person admin = new Person();
 		admin.setRole(Role.ADMINISTRATIVESTAFF);
 		return admin;
 	}

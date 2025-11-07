@@ -2,7 +2,7 @@ package app.domain.services;
 
 import app.domain.model.MedicalRecord;
 import app.domain.model.Patient;
-import app.domain.model.User;
+import app.domain.model.Person;
 import app.domain.model.enums.Role;
 import app.domain.ports.MedicalRecordPort;
 import app.domain.ports.PatientPort;
@@ -15,7 +15,7 @@ public class SearchMedicalRecordByPatient {
 	private PatientPort PatientPort;
 	private MedicalRecordPort medicalRecordPort;
 
-	public List<MedicalRecord> search(Patient Patient, User user) throws Exception {
+	public List<MedicalRecord> search(Patient Patient, Person user) throws Exception {
 		Patient = PatientPort.search(Patient);
 		if (Patient == null) {
 			throw new Exception("debe consultar ordenes de un paciente registrado");

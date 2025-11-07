@@ -5,7 +5,7 @@ import app.domain.model.Visit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import app.domain.model.User;
+import app.domain.model.Person;
 import app.domain.ports.VisitPort;
 import app.domain.model.enums.Role;
 @Service
@@ -14,7 +14,7 @@ public class CreateVisit {
 	private VisitPort visitPort;
 
 	// Método para crear una visita
-	public void create(User user,Visit visit) throws Exception {
+	public void create(Person user,Visit visit) throws Exception {
 		if (visit == null) {
 			throw new IllegalArgumentException("La visita no puede ser nula");
 		}

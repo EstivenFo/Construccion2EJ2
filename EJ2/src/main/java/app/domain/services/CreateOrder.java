@@ -9,14 +9,14 @@ import app.domain.model.Order;
 import app.domain.model.OrderItem;
 import app.domain.ports.OrderPort;
 import app.domain.model.enums.Role;
-import app.domain.model.User;
+import app.domain.model.Person;
 
 @Service
 public class CreateOrder {
 	@Autowired
 	private OrderPort orderPort;
 
-	public void create(long patientId, long doctorId, boolean requiresHospitalization, User user, Order order)
+	public void create(long patientId, long doctorId, boolean requiresHospitalization, Person user, Order order)
 			throws Exception {
 
 		if (patientId == 0){

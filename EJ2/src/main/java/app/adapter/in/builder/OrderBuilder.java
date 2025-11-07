@@ -8,7 +8,7 @@ import app.adapter.in.validators.PatientValidator;
 import app.adapter.in.validators.UserValidator;
 import app.domain.model.Order;
 import app.domain.model.Patient;
-import app.domain.model.User;
+import app.domain.model.Person;
 
 @Component
 public class OrderBuilder {
@@ -22,7 +22,7 @@ public class OrderBuilder {
 	public Order builder(String orderNumber, String patientId, String doctorId, String creationDate) throws Exception {
 		Order order = new Order();
 		Patient patient = new Patient();
-		User doctor = new User();
+		Person doctor = new Person();
 		order.setOrderNumber(orderValidator.orderNumberValidator(orderNumber));
 		order.setPatientId(orderValidator.patientIdValidator(patientId));
 		order.setDoctorId(orderValidator.doctorIdValidator(doctorId));

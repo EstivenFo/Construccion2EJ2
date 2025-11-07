@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import app.domain.model.Order;
 import app.domain.model.Record;
 import app.domain.model.Patient;
-import app.domain.model.User;
+import app.domain.model.Person;
 import app.domain.model.MedicalRecord;
 import app.domain.services.CreateOrder;
 import app.domain.services.CreateRecord;
@@ -33,10 +33,10 @@ public class MedicClient {
 
 	private final Scanner reader = new Scanner(System.in);
 
-	private User currentDoctor; // ✅ ahora es User, no long
+	private Person currentDoctor; // ✅ ahora es User, no long
 
 	// Simulamos autenticación del médico
-	public void login(User doctor) {
+	public void login(Person doctor) {
 		this.currentDoctor = doctor;
 	}
 

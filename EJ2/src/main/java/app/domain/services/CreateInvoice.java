@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import app.domain.model.Invoice;
 import app.domain.model.enums.Role;
 import app.domain.ports.InvoicePort;
-import app.domain.model.User;
+import app.domain.model.Person;
 
 @Service
 public class CreateInvoice {
@@ -14,7 +14,7 @@ public class CreateInvoice {
 	private InvoicePort invoicePort;
 
 	// Crear y guardar una nueva factura
-	public void create(Invoice invoice, User user) throws Exception {
+	public void create(Invoice invoice, Person user) throws Exception {
 		if (invoice == null) {
 			throw new IllegalArgumentException("La factura no puede ser nula.");
 		}

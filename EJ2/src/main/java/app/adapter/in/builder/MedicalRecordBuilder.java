@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import app.adapter.in.validators.MedicalRecordValidator;
 import app.domain.model.MedicalRecord;
-import app.domain.model.User;
+import app.domain.model.Person;
 
 @Component
 public class MedicalRecordBuilder {
@@ -23,8 +23,8 @@ public class MedicalRecordBuilder {
             String treatment) throws Exception {
 
         MedicalRecord medicalRecord = new MedicalRecord();
-        User doctor = new User();
-        User patient = new User();
+        Person doctor = new Person();
+        Person patient = new Person();
 
         // === VALIDACIONES ===
         medicalRecord.setCreationDate(medicalRecordValidator.creationDateValidator(creationDate));

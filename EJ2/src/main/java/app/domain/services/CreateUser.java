@@ -3,7 +3,7 @@ package app.domain.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import app.domain.model.User;
+import app.domain.model.Person;
 import app.domain.model.enums.Role;
 import app.domain.ports.UserPort;
 @Service
@@ -12,7 +12,7 @@ public class CreateUser {
     private  UserPort userPort;
 
     // Crear empleado con validación de rol
-    public void createUser( User user) throws Exception {
+    public void createUser( Person user) throws Exception {
         Role role = user.getRole();
         if (user.getRole() != Role.HUMANRESOURCES) {
             throw new SecurityException("Solo personal de Recursos Humanos puede crear un empleado.");
@@ -30,8 +30,8 @@ public class CreateUser {
 
 
     // Buscar empleado por ID
-    public User searchById(long idCard) throws Exception {
-        User user = userPort.searchById(idCard);
+    public Person searchById(long idCard) throws Exception {
+        Person user = userPort.searchById(idCard);
         if (user == null) {
             throw new Exception("Empleado con ID " + idCard + " no encontrado.");
         }

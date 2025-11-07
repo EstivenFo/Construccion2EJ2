@@ -5,15 +5,15 @@ import app.domain.ports.UserPort;
 
 import org.springframework.stereotype.Service;
 
-import app.domain.model.User;
+import app.domain.model.Person;
 @Service
 public class UpdateUser {
 
     private  UserPort userPort;
     // Método para actualizar un empleado
-    public void update(User user) throws Exception {
+    public void update(Person user) throws Exception {
         // Validar que el empleado exista
-    	  User existingUser = userPort.searchById(user.getIdCard());
+    	  Person existingUser = userPort.searchById(user.getIdCard());
           if (existingUser == null) {
               throw new Exception("No se encontró un usuario con la cédula: " + user.getIdCard());
           }
